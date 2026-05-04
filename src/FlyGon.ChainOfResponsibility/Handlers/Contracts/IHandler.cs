@@ -17,6 +17,6 @@
         /// <summary>
         /// Implement to handle the custom object.
         /// </summary>
-        object Handle(object request);
+        object? Handle(object request);
     }
 }

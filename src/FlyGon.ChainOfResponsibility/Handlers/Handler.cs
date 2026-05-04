@@ -11,7 +11,7 @@ namespace FlyGon.ChainOfResponsibility.Handlers
     /// </remarks>
     public abstract class Handler : IHandler
     {
-        private IHandler _nextHandler;
+        private IHandler? _nextHandler;
 
         /// <summary>
         /// Use to indicate the next Handler that handles the custom object.
@@ -40,7 +40,7 @@ namespace FlyGon.ChainOfResponsibility.Handlers
         /// <returns>
         /// Returns the reference of the Handler that handled the object, or null.
         /// </returns>
-        public virtual object Handle(object request)
+        public virtual object? Handle(object request)
         {
             if (_nextHandler != null)
                 return _nextHandler.Handle(request);

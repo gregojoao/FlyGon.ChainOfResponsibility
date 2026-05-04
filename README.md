@@ -1,29 +1,49 @@
 # FlyGon.ChainOfResponsibility
 
-[![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/download)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![NuGet](https://img.shields.io/badge/nuget-v2.0.0-blue.svg)](https://www.nuget.org/packages/FlyGon.ChainOfResponsibility)
+[![Build and Test](https://github.com/grecojoao/FlyGon.ChainOfResponsibility/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/grecojoao/FlyGon.ChainOfResponsibility/actions/workflows/build-and-test.yml)
+[![NuGet](https://img.shields.io/nuget/v/FlyGon.ChainOfResponsibility.svg)](https://www.nuget.org/packages/FlyGon.ChainOfResponsibility/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/FlyGon.ChainOfResponsibility.svg)](https://www.nuget.org/packages/FlyGon.ChainOfResponsibility/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A simple and elegant implementation of the Chain of Responsibility design pattern for .NET 10.
 
 ## 📦 Installation
 
+Install via NuGet Package Manager:
+
 ```bash
 dotnet add package FlyGon.ChainOfResponsibility
 ```
 
-## 🚀 Quick Start
+Or via Package Manager Console:
+
+```powershell
+Install-Package FlyGon.ChainOfResponsibility
+```
+
+## 🚀 Features
+
+- ✅ Simple and intuitive API
+- ✅ Fully compatible with .NET 10
+- ✅ Nullable reference types support
+- ✅ Comprehensive unit tests
+- ✅ Well documented code
+- ✅ MIT License
+
+## 📖 Usage
+
+### Basic Example
 
 ```csharp
 using FlyGon.ChainOfResponsibility.Handlers;
 
-// Create your custom handlers
+// Create custom handlers
 class MonkeyHandler : Handler
 {
     public override object? Handle(object request)
     {
         if ((request as string) == "Banana")
-            return $"Monkey: I'll eat the {request}.\n";
+            return $"Monkey: I'll eat the {request}.";
         return base.Handle(request);
     }
 }
@@ -33,76 +53,85 @@ class SquirrelHandler : Handler
     public override object? Handle(object request)
     {
         if (request.ToString() == "Nut")
-            return $"Squirrel: I'll eat the {request}.\n";
+            return $"Squirrel: I'll eat the {request}.";
         return base.Handle(request);
     }
 }
 
-// Chain the handlers
+class DogHandler : Handler
+{
+    public override object? Handle(object request)
+    {
+        if (request.ToString() == "MeatBall")
+            return $"Dog: I'll eat the {request}.";
+        return base.Handle(request);
+    }
+}
+
+// Setup the chain
 var monkey = new MonkeyHandler();
 var squirrel = new SquirrelHandler();
-monkey.SetNext(squirrel);
+var dog = new DogHandler();
+
+monkey.SetNext(squirrel).SetNext(dog);
 
 // Use the chain
-var result = monkey.Handle("Nut");
-Console.WriteLine(result); // Output: Squirrel: I'll eat the Nut.
+var result = monkey.Handle("Banana");
+Console.WriteLine(result); // Output: Monkey: I'll eat the Banana.
 ```
 
-## 📖 Documentation
+## 🏗️ How It Works
 
-### IHandler Interface
+The Chain of Responsibility pattern allows you to pass requests along a chain of handlers. Each handler decides either to process the request or to pass it to the next handler in the chain.
 
-The `IHandler` interface defines the contract for all handlers:
+### Key Components
 
-```csharp
-public interface IHandler
-{
-    IHandler SetNext(IHandler handler);
-    object? Handle(object request);
-}
-```
-
-### Handler Base Class
-
-The `Handler` abstract class provides the base implementation:
-
-```csharp
-public abstract class Handler : IHandler
-{
-    public IHandler SetNext(IHandler handler);
-    public virtual object? Handle(object request);
-}
-```
-
-## 🎯 Features
-
-- ✅ Simple and intuitive API
-- ✅ Fully compatible with .NET 10
-- ✅ Nullable reference types support
-- ✅ Comprehensive unit tests
-- ✅ Well documented code
-- ✅ Fluent interface for chaining handlers
+- **IHandler**: Interface that defines the contract for handlers
+- **Handler**: Abstract base class that implements the chain logic
+- **SetNext()**: Method to link handlers together
+- **Handle()**: Method to process requests or pass them along
 
 ## 🧪 Testing
 
-The project includes comprehensive unit tests with 100% coverage:
+The library includes comprehensive unit tests with 100% code coverage:
 
 ```bash
 dotnet test
 ```
 
-## 📝 License
+## 📝 Requirements
+
+- .NET 10.0 or higher
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-**João Greco** - [Greco Labs](https://github.com/grecojoao)
+**João Greco**
+- Company: Greco Labs
+- GitHub: [@grecojoao](https://github.com/grecojoao)
 
-## 🤝 Contributing
+## 🔗 Links
 
-Contributions, issues, and feature requests are welcome!
+- [NuGet Package](https://www.nuget.org/packages/FlyGon.ChainOfResponsibility/)
+- [GitHub Repository](https://github.com/grecojoao/FlyGon.ChainOfResponsibility)
+- [Report Issues](https://github.com/grecojoao/FlyGon.ChainOfResponsibility/issues)
 
-## ⭐ Show your support
+## 📊 Version History
 
-Give a ⭐️ if this project helped you!
+### 2.0.0
+- Updated to .NET 10
+- Added nullable reference types support
+- Added comprehensive unit tests
+- Updated to latest dependencies
+- Company updated to Greco Labs
+
+### 1.0.1
+- Added documentation
+- Initial stable release

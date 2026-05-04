@@ -6,7 +6,7 @@ namespace FlyGon.ChainOfResponsibility.HowToUse
 {
     class MonkeyHandler : Handler
     {
-        public override object Handle(object request)
+        public override object? Handle(object request)
         {
             if ((request as string) == "Banana")
                 return $"Monkey: I'll eat the {request}.\n";
@@ -16,7 +16,7 @@ namespace FlyGon.ChainOfResponsibility.HowToUse
 
     class SquirrelHandler : Handler
     {
-        public override object Handle(object request)
+        public override object? Handle(object request)
         {
             if (request.ToString() == "Nut")
                 return $"Squirrel: I'll eat the {request}.\n";
@@ -26,7 +26,7 @@ namespace FlyGon.ChainOfResponsibility.HowToUse
 
     class DogHandler : Handler
     {
-        public override object Handle(object request)
+        public override object? Handle(object request)
         {
             if (request.ToString() == "MeatBall")
                 return $"Dog: I'll eat the {request}.\n";
